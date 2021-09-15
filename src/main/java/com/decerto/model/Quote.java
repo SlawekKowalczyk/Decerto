@@ -15,9 +15,11 @@ public class Quote {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "author_id", nullable = false, referencedColumnName = "id")
-    private Author author;
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "surname")
+    private String surname;
 
     @Column(name = "content")
     private String content;

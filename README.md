@@ -12,23 +12,21 @@ Run test
 
 ### Endpoints descritpion ###
 http method, path, short description, example
-* GET, '/api/v1/quote/', get all available quotes
+* GET, '/api/v1/quote/', get all available quotes,
+            example: RequestParam: pageNo: integer, pageSize: integer
 * PUT, '/api/v1/quote/{id}', update existing quote, 
-            example: PathVariable: integer,
+            example: PathVariable: id: integer,
                     body: {
-                              "author": {
-                                  "name": "string",
-                                  "surname": "string"
-                              },
-                              "content":"string"
+                            "name": "string",
+                            "surname": "string"
+                            "content":"string"
                           }
 * DELETE, '/api/v1/quote/{id}', delete quote by id,
-            example: PathVariable: integer
+            example: PathVariable: id: integer
 * POST, '/api/v1/quote/add', add quote,
-            body: {
-                      "author": {
-                          "name":"string",
-                          "surname": "string"
-                      },
-                      "content":"string"
-                  }
+            example:
+                    body: {
+                            "name":"string",
+                            "surname": "string"
+                            "content":"string"
+                           }

@@ -1,13 +1,12 @@
-package com.decerto.exception;
+package com.decerto.exception.handler;
 
+import com.decerto.exception.ValidationException;
+import com.decerto.exception.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import javax.security.auth.login.AccountNotFoundException;
-import java.util.ArrayList;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
@@ -16,21 +15,21 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 @RestControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(ValidationException.class)
+    @ExceptionHandler(ValidationException.FieldNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse notFound(ValidationException ex) {
-        return new ErrorResponse(ex.getMessage(), ex.getErrors());
+    public ErrorResponse notFound(ValidationException.FieldNotFoundException ex) {
+        return new ErrorResponse(ex.getMESSAGE(), ex.getErrors());
+    }
+
+    @ExceptionHandler(ValidationException.QuoteNotFoundException.class)
+    @ResponseStatus(BAD_REQUEST)
+    public ErrorResponse wrongParameter(ValidationException.QuoteNotFoundException ex) {
+        return new ErrorResponse(ex.getMESSAGE());
     }
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ErrorResponse internal(Throwable ex) {
-        return new ErrorResponse(ex.getLocalizedMessage());
-    }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    @ResponseStatus(BAD_REQUEST)
-    public ErrorResponse wrongParameter(IllegalArgumentException ex) {
         return new ErrorResponse(ex.getLocalizedMessage());
     }
 }
