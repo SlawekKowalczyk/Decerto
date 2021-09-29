@@ -18,13 +18,13 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(ValidationException.FieldNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse notFound(ValidationException.FieldNotFoundException ex) {
-        return new ErrorResponse(ex.getMESSAGE(), ex.getErrors());
+        return new ErrorResponse(ex.getMessage(), ex.getErrors());
     }
 
     @ExceptionHandler(ValidationException.QuoteNotFoundException.class)
     @ResponseStatus(BAD_REQUEST)
     public ErrorResponse wrongParameter(ValidationException.QuoteNotFoundException ex) {
-        return new ErrorResponse(ex.getMESSAGE());
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ExceptionHandler(Throwable.class)

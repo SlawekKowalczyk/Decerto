@@ -8,21 +8,21 @@ import java.util.List;
 
 @Getter
 abstract class RestException extends RuntimeException {
-    private final HttpStatus HTTP_STATUS;
-    private final String CODE;
-    private final String MESSAGE;
+    private HttpStatus httpStatus;
+    private String code;
+    private String message;
     private List<ErrorDetails> errors;
 
     public RestException(HttpStatus httpStatus, String code, String message, List<ErrorDetails> errors) {
-        this.HTTP_STATUS = httpStatus;
-        this.CODE = code;
-        this.MESSAGE = message;
+        this.httpStatus = httpStatus;
+        this.code = code;
+        this.message = message;
         this.errors = errors;
     }
 
     public RestException(HttpStatus httpStatus, String code, String message) {
-        this.HTTP_STATUS = httpStatus;
-        this.CODE = code;
-        this.MESSAGE = message;
+        this.httpStatus = httpStatus;
+        this.code = code;
+        this.message = message;
     }
 }

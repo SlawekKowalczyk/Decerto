@@ -32,13 +32,9 @@ public class QuoteControllerImpl implements QuoteController {
     public List<QuoteDTO> getQuotes(Integer pageNo, Integer pageSize) {
         Pageable paging = PageRequest.of(pageNo, pageSize);
         Page<Quote> quotePage = quoteRepository.findAll(paging);
-        if (quotePage.hasContent()) {
-            return quotePage.getContent().stream()
-                    .map(quoteMapper::convert)
-                    .collect(Collectors.toList());
-        } else {
-            return new ArrayList<>();
-        }
+        return quotePage.getContent().stream()
+                .map(quoteMapper::convert)
+                .collect(Collectors.toList());
     }
 
     @Override
